@@ -6,7 +6,9 @@
 <ul>
   <% @subs.each do |subforum| %>
     <li>
-      <%= link_to subforum.title, sub_url(subforum) %>
+      <%= link_to subforum.title, sub_url(subforum) %> |
+      <%= link_to "edit", edit_sub_url(subforum) if user_owned?(subforum) %> | 
+      <%= link_to "delete", sub_url(subforum), method: :delete if user_owned?(subforum) %>
     </li>
   <% end %>
 </ul>

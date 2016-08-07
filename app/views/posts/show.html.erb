@@ -10,7 +10,7 @@
 <br>
 <br>
 <h4>Comments</h4>
-<%= button_to "Comment on this post", new_post_comment_url(@post) %>
+<%= button_to "Comment on this post", new_post_comment_url(@post), method: :get %>
 
 <ul>
   <% @comments_by_parent_id[nil].each do |top_level_comment| %>

@@ -11,6 +11,7 @@
 #
 
 class User < ActiveRecord::Base
+
   validates :username, :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: { minimum: 8, allow_nil: true }
@@ -18,6 +19,7 @@ class User < ActiveRecord::Base
 
   has_many :subs, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :votes, inverse_of: :user
 
   attr_reader :password
 

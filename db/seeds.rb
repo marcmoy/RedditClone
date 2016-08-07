@@ -17,7 +17,7 @@ User.create!(username: 'marc', password: 'password')
   Sub.create!(
     title: Faker::Hipster.word.capitalize,
     description: Faker::Hipster.sentence,
-    user_id: rand(1..50)
+    user_id: 1
     )
 end
 
@@ -50,5 +50,4 @@ end
         )
     end
   end
-
 end

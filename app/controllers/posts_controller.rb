@@ -43,17 +43,39 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_id(params[:id])
+    cookies[:post_id] = params[:id]
     @sub = Sub.find_by_id(cookies[:sub_id]) if cookies[:sub_id]
     @comments_by_parent_id = @post.comments_by_parent_id
   end
 
   def upvote
-    render :show
+    vote(1)
+  end
+
+  def downvote
+    vote(-1)
   end
 
   private
 
   def post_params
     params.require(:post).permit(:title, :url, :content, sub_ids: [])
+  end
+
+  def vote(value)
+    @post = Post.find(params[:id])
+    @vote = Vote.find_by(
+      votable_id: @post.id, votable_type: "#{self.class.name}", user_id: current_user.id
+    )
+
+    if @vote
+      @vote.update(value: value)
+    else
+      @post.votes.create!(
+        user_id: current_user.id, value: value
+      )
+    end
+
+    redirect_to sub_url(cookies[:sub_id])
   end
 end

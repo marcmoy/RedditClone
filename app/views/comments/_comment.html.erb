@@ -1,5 +1,7 @@
 <p>
-  <%= link_to comment.content, comment_url(comment.id) %>
+  <b>(<%= comment.score %>) <%= link_to comment.content_preview, comment_url(comment.id) %></b> |
+  <%= link_to "upvote", upvote_comment_url(comment), method: :post %> |
+  <%= link_to "downvote", downvote_comment_url(comment), method: :post %>
 </p>
 
 <ul>

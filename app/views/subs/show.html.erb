@@ -12,8 +12,11 @@
 
 <% @sub.posts.each do |post| %>
   <p>
+    (<%= post.score %>)
     <b><%= link_to post.title, post_url(post) %>:</b>
-    <%= link_to "edit", edit_post_url(post) if user_owned?(post) %>
+    <%= link_to "upvote!", upvote_post_url(post), method: :post %> |
+    <%= link_to "downvote!", downvote_post_url(post), method: :post %> |
+    <%= link_to "edit", edit_post_url(post) if user_owned?(post) %> |
     <%= link_to "delete", sub_post_url(@sub.id, post.id), method: :delete if user_owned?(post) %><br>
     <%= post.content %>
 </p>

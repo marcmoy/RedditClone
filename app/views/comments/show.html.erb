@@ -1,5 +1,11 @@
-<h1><%= @comment.content %></h1>
+<%= link_to "Back to Post", post_url(@post)%>
+<h3>Comment:</h3>
+<h4><%= @comment.content %></h4>
 
+<%= link_to "upvote!", upvote_comment_url(@comment), method: :post %> |
+<%= link_to "downvote!", downvote_comment_url(@comment), method: :post %>
+<br>
+<br>
 
 <form action="/comments" method="post">
   <%= auth_token_helper %>

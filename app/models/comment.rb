@@ -19,4 +19,8 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   has_many :comments
 
+  def content_preview
+    content.length < 10 ? content : content[0..10] + "..."
+  end
+
 end
