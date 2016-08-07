@@ -1,6 +1,6 @@
 class SubsController < ApplicationController
 
-  before_action :require_login!, except: [:index]
+  before_action :require_login!, except: [:index, :show]
 
   def index
     @subs = Sub.all

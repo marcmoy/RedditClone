@@ -1,6 +1,7 @@
 module ApplicationHelper
 
   def user_owned?(instance)
+    return false if current_user.nil?
     current_user.id == instance.user_id
   end
 
