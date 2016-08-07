@@ -8,25 +8,42 @@
 
 User.create!(username: 'marc', password: 'password')
 
-50.times do
+def sub_info(index)
+  case index
+  when 1
+    { title: Faker::Pokemon.name, description: Faker::Pokemon.location }
+  when 2
+    { title: Faker::StarWars.character, description: Faker::StarWars.quote }
+  when 3
+    { title: Faker::Superhero.name, description: Faker::Superhero.power }
+  when 4
+    { title: Faker::Book.title, description: Faker::Hipster.sentence }
+  end
+end
+
+50.times do |user_id|
+
+  sub_data = sub_info(rand(1..4))
+
   User.create!(
     username: Faker::Internet.user_name,
     password: 'password'
     )
 
   Sub.create!(
-    title: Faker::Hipster.word.capitalize,
-    description: Faker::Hipster.sentence,
-    user_id: 1
+    title: sub_data[:title],
+    description: sub_data[:description],
+    user_id: user_id
     )
 end
 
-100.times do |i|
+100.times do
+  index = rand(1..4)
   Post.create!(
-    title: Faker::Hipster.word.capitalize,
-    content: Faker::Hipster.paragraphs(2).join("\n"),
+    title: Faker::Hipster.sentence,
+    content: Faker::Hipster.paragraphs,
     url: Faker::Internet.url,
-    user_id: 1,
+    user_id: rand(1..50),
     sub_ids: Array.new(rand(1..50)){ rand(1..50) }.uniq
     )
 end
@@ -36,7 +53,7 @@ end
   (rand(1..10)).times do
     Comment.create!(
       content: Faker::Hipster.sentence,
-      user_id: 1,
+      user_id: rand(1..50),
       post_id: post_id,
       comment_id: nil
     )
@@ -44,7 +61,7 @@ end
     (rand(1..10)).times do
       Comment.create!(
           content: Faker::Hipster.sentence,
-          user_id: 1,
+          user_id: rand(1..50),
           post_id: post_id,
           comment_id: Comment.last.id
         )
