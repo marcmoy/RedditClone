@@ -12,8 +12,8 @@
     <% if current_user %>
       <%= button_to "Logout", session_url, method: :delete %>
     <% else %>
-      <%= (button_to "Login", new_session_url) %>
-      <%= button_to "Sign up", new_user_url %>
+      <%= button_to "Login", new_session_url, method: :get %>
+      <%= button_to "Sign up", new_user_url, method: :get %>
     <% end %>
 
     <ul>

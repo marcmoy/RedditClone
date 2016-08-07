@@ -26,7 +26,7 @@ end
     title: Faker::Hipster.word.capitalize,
     content: Faker::Hipster.paragraphs(2).join("\n"),
     url: Faker::Internet.url,
-    user_id: rand(1..50),
+    user_id: 1,
     sub_ids: Array.new(rand(1..50)){ rand(1..50) }.uniq
     )
 end
@@ -36,7 +36,7 @@ end
   (rand(1..10)).times do
     Comment.create!(
       content: Faker::Hipster.sentence,
-      user_id: rand(1..50),
+      user_id: 1,
       post_id: post_id,
       comment_id: nil
     )
@@ -44,7 +44,7 @@ end
     (rand(1..10)).times do
       Comment.create!(
           content: Faker::Hipster.sentence,
-          user_id: rand(1..50),
+          user_id: 1,
           post_id: post_id,
           comment_id: Comment.last.id
         )

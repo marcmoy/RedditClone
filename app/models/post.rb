@@ -12,6 +12,7 @@
 #
 
 class Post < ActiveRecord::Base
+  include Votable
   validates :subs, :title, :user_id, presence: true
 
   has_many :post_subs, dependent: :destroy, inverse_of: :post

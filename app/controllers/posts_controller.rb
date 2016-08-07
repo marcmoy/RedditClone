@@ -47,6 +47,10 @@ class PostsController < ApplicationController
     @comments_by_parent_id = @post.comments_by_parent_id
   end
 
+  def upvote
+    render :show
+  end
+
   private
 
   def post_params
