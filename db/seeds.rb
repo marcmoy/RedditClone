@@ -5,3 +5,50 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create!(username: 'marc', password: 'password')
+
+50.times do
+  User.create!(
+    username: Faker::Internet.user_name,
+    password: 'password'
+    )
+
+  Sub.create!(
+    title: Faker::Hipster.word.capitalize,
+    description: Faker::Hipster.sentence,
+    user_id: rand(1..50)
+    )
+end
+
+100.times do |i|
+  Post.create!(
+    title: Faker::Hipster.word.capitalize,
+    content: Faker::Hipster.paragraphs(2).join("\n"),
+    url: Faker::Internet.url,
+    user_id: rand(1..50),
+    sub_ids: Array.new(rand(1..50)){ rand(1..50) }.uniq
+    )
+end
+
+100.times do |post_id|
+  #parent comments
+  (rand(1..10)).times do
+    Comment.create!(
+      content: Faker::Hipster.sentence,
+      user_id: rand(1..50),
+      post_id: post_id,
+      comment_id: nil
+    )
+    #nested comments
+    (rand(1..10)).times do
+      Comment.create!(
+          content: Faker::Hipster.sentence,
+          user_id: rand(1..50),
+          post_id: post_id,
+          comment_id: Comment.last.id
+        )
+    end
+  end
+
+end

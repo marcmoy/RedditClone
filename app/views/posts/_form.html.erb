@@ -1,0 +1,33 @@
+<% action = (post.persisted? ? post_url(post) : posts_url) %>
+<% method = (post.persisted? ? :patch : :post) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token_helper %>
+
+  <input type="hidden" name="post[sub_ids][]" value="">
+
+  <% Sub.all.each do |subforum| %>
+    <label><%= subforum.title %>
+      <input
+        type="checkbox"
+        name="post[sub_ids][]"
+        value="<%= subforum.id %>"
+        <%= "checked" if post.sub_ids.include?(subforum.id) %>><br>
+    </label>
+  <% end %>
+
+  <label for="post_title">title:</label>
+  <input id="post_title" type="text" name="post[title]" value="<%= post.title %>">
+  <br>
+  <label for="post_url">url:</label>
+  <input id="post_url" type="text" name="post[url]" value="<%= post.url %>">
+  <br>
+
+  <label for="post_content">content:</label>
+  <br>
+  <textarea id="post_content" name="post[content]" rows="8" cols="40"><%= post.content %></textarea>
+  <br>
+
+  <input type="submit" value="create post">
+</form>

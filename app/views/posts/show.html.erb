@@ -1,0 +1,22 @@
+<%= link_to "Back to All Subforums", subs_url %><br>
+<%= link_to "Back to #{@sub.title}", sub_url(@sub.id) %>
+
+<h1> <%= link_to @post.title, @post.url, target: '_blank' %></h1>
+
+<h4>Content</h4>
+<%= @post.content %>
+<h4>Relating Subforums</h4>
+<%= list_relating_subforums(@post) %>
+<br>
+<br>
+<h4>Comments</h4>
+<%= link_to "Comment on this post", new_post_comment_url(@post) %>
+
+<ul>
+<% @post.comments.each do |comment| %>
+  <% next unless comment.comment_id.nil? %>
+  <li>
+    <%= comment.content %>
+  </li>
+<% end %>
+</ul>

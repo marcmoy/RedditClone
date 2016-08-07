@@ -1,0 +1,17 @@
+<h1>sign up</h1>
+
+<form action="/users" method="post">
+
+<%= auth_token_helper %>
+
+  <label for="username">username:</label>
+  <input id="username" type="text" name="user[username]">
+  <br>
+
+  <label for="password">password:</label>
+  <input id="password" type="password" name="user[password]">
+  <br>
+
+  <input type="submit" value="sign up">
+
+</form>

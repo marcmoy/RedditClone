@@ -8,6 +8,33 @@
 </head>
 <body>
 
+  <header>
+    <% if current_user %>
+      <%= button_to "logout", session_url, method: :delete %>
+    <% end %>
+
+    <ul>
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <li>
+          <%= error %>
+        </li>
+      <% end %>
+    <% end %>
+    </ul>
+
+    <ul>
+    <% if flash[:notice] %>
+      <% flash[:notice].each do |notice| %>
+        <li>
+          <%= notice %>
+        </li>
+      <% end %>
+    <% end %>
+    </ul>
+  </header>
+
+
 <%= yield %>
 
 </body>

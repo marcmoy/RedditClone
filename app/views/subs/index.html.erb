@@ -1,0 +1,19 @@
+<header>
+  <% unless current_user %>
+    <%= link_to "login", new_session_url %>
+    <%= link_to "sign up", new_user_url %>
+  <% end %>
+</header>
+
+<h1>Welcome to Reddit</h1>
+<h3>Check out our subforums</h3>
+
+<%= link_to "Start a subforum!", new_sub_url %>
+
+<ul>
+  <% @subs.each do |subforum| %>
+    <li>
+      <%= link_to subforum.title, sub_url(subforum) %>
+    </li>
+  <% end %>
+</ul>

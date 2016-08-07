@@ -1,0 +1,20 @@
+<h1><%= @sub.title %></h1>
+
+<p>
+  <%= @sub.description %>
+</p>
+
+<%= link_to "Create post", new_sub_post_url(@sub) %><br>
+<%= link_to "Back to subforums", root_url %><br>
+
+<%= link_to "Edit subforum", edit_sub_url(@sub) if user_owned?(@sub) %><br>
+<%= button_to "Delete subforum", sub_url(@sub), method: :delete if user_owned?(@sub) %>
+
+<% @sub.posts.each do |post| %>
+  <p>
+    <b><%= link_to post.title, post_url(post) %>:</b>
+    <%= link_to "edit", edit_post_url(post) if user_owned?(post) %>
+    <%= link_to "delete", sub_post_url(@sub.id, post.id), method: :delete if user_owned?(post) %><br>
+    <%= post.content %>
+</p>
+<% end %>

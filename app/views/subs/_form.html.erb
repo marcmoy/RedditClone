@@ -1,0 +1,21 @@
+<% action = (subforum.persisted? ? sub_url(subforum) : subs_url) %>
+<% method = (subforum.persisted? ? :patch : :post) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <label for="sub_title">title:</label>
+  <input id="sub_title" type="text" name="sub[title]" value="<%= subforum.title %>">
+  <br>
+
+  <label for="sub_desc">description:</label>
+  <br>
+  <textarea id="sub_desc" name="sub[description]" rows="8" cols="40"><%= subforum.description %></textarea>
+  <br>
+
+  <input type="submit" value="create subforum">
+</form>
