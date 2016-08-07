@@ -10,13 +10,14 @@
 <br>
 <br>
 <h4>Comments</h4>
-<%= link_to "Comment on this post", new_post_comment_url(@post) %>
+<%= button_to "Comment on this post", new_post_comment_url(@post) %>
 
 <ul>
-<% @post.comments.each do |comment| %>
-  <% next unless comment.comment_id.nil? %>
-  <li>
-    <%= comment.content %>
-  </li>
-<% end %>
+  <% @comments_by_parent_id[nil].each do |top_level_comment| %>
+    <li>
+      <%= render("comments/comment",
+                 comment: top_level_comment,
+                 comments_by_parent: @comments_by_parent_id) %>
+    </li>
+  <% end %>
 </ul>
