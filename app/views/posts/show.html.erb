@@ -5,7 +5,7 @@
 
 <h4>Content</h4>
 <%= @post.content %>
-<h4>Relating Subforums</h4>
+<h4>Related Subforums</h4>
 <%= list_relating_subforums(@post) %>
 <br>
 <br>
@@ -17,7 +17,7 @@
     <li>
       <%= render("comments/comment",
                  comment: top_level_comment,
-                 comments_by_parent: @comments_by_parent_id) %>
+                 comments_by_parent_id: @comments_by_parent_id) %>
     </li>
   <% end %>
 </ul>
